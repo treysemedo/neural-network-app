@@ -16,6 +16,20 @@ A matlab app for vowels image recognition
 
 * **Upload All dataset Images** -> it will process and convert the images from all the dataset folders into a file ready to be used by our main app
 
+* **Load Network** -> load a already trained network into the app
+
+* **Train Network** -> trains the network with the last images loaded and the **train configuration** input settings
+
+* **Save Network** -> save the current Network 
+
+* **Draw Letter** -> opens a paint aplication where you can draw a letter then save it for latter usage in classify image
+
+* **classify Image** -> choose a image, it will be sent to the Network and simulated to get its classification
+
+* **classify Folder Image** -> it will do the **classify Image** for all the images currently entered in the app
+
+### Train Configuration
+
 * **Hidden layers Function** -> choose the ativation function for the hidden layers
 
 * **Output function** -> choose the activation function for the output unity
