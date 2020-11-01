@@ -1,4 +1,4 @@
-function carregarRede()
+function loadNetwork()
 
 [file,path] = uigetfile('*.mat');
 if isequal(file,0)

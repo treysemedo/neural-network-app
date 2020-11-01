@@ -1,37 +1,36 @@
-function [accuracy,accuracy1]= iris_ex(funcaoTreino, camadas, epoca, funcCam1, funcCam2, divideFcn, trainRatio, valRatio, testRatio)
-%IRIS_DATASET Summary of this function goes here
-%   Detailed explanation goes here
+function [accuracy,accuracy1]= iris_ex(funcaoTreino, layers, epochs, layer1func, layer2func, divideFcn, trainRatio, valRatio, testRatio)
+
 
 % Carrega o dataset
 
 structImg=load( 'imagesvectorized.mat');
 structTarget=load( 'labels.mat');
 
-matrizImagem=structImg.matrizImagem;
+imagesMatrix=structImg.matrizImagem;
 matrizTarget=structTarget.target;
 
 
 % % CRIAR E CONFIGURAR A REDE NEURONAL
-% % INDICAR: N? camadas escondidas e nos por camada escondida
+% % INDICAR: N? layers escondidas e nos por camada escondida
 % % INDICAR: Funcao de treino: {'trainlm', 'trainbfg', traingd'}
-% % INDICAR: Funcoes de ativacao das camadas escondidas e de saida: {'purelin', 'logsig', 'tansig'}
+% % INDICAR: Funcoes de ativacao das layers escondidas e de saida: {'purelin', 'logsig', 'tansig'}
 % % INDICAR: Divisao dos exemplos pelos conjuntos de treino, validacao e teste
 %
-camadasString = camadas;
-C = strsplit(camadasString);
- camadasFinal= str2double(C);
- numeroCamadas=numel(camadasFinal);
+layersString = layers;
+C = strsplit(layersString);
+ finalLayers= str2double(C);
+ numberLayers=numel(finalLayers);
  
 
-rede = feedforwardnet([camadasFinal]);
+rede = feedforwardnet([finalLayers]);
 
 rede.trainFcn = funcaoTreino;
-rede.trainParam.epochs = epoca;
-for ii=1:numeroCamadas
-    rede.layers{ii}.transferFcn = funcCam1;
+rede.trainParam.epochs = epochs;
+for ii=1:numberLayers
+    rede.layers{ii}.transferFcn = layer1func;
 end
 
-rede.layers{numeroCamadas+1}.transferFcn = funcCam2;
+rede.layers{numberLayers+1}.transferFcn = layer2func;
 if  strcmp(divideFcn,'On') && trainRatio+valRatio+testRatio==1
         rede.divideFcn = 'dividerand';
         rede.divideParam.trainRatio = trainRatio;
@@ -43,10 +42,10 @@ end
 
 
 % % TREINAR
-[rede ,tr]= train(rede, matrizImagem, matrizTarget);
+[rede ,tr]= train(rede, imagesMatrix, matrizTarget);
 
 % SIMULAR
-out = sim(rede, matrizImagem);
+out = sim(rede, imagesMatrix);
 % 
 % time = tr.time(:,size(tr.time,2))/60;
 % time = round(time,2);
@@ -72,7 +71,7 @@ accuracy = r/size(out,2)*100;
 
 
 % SIMULAR A REDE APENAS NO CONJUNTO DE TESTE
-TInput = matrizImagem(:, tr.testInd);
+TInput = imagesMatrix(:, tr.testInd);
 TTargets = matrizTarget(:, tr.testInd);
 
 out = sim(rede, TInput);
