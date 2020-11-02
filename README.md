@@ -24,15 +24,15 @@ A matlab app for vowels image recognition
 
 * **Draw Letter** -> opens a paint aplication where you can draw a letter then save it for latter usage in classify image
 
-* **classify Image** -> choose a image, it will be sent to the Network and simulated to get its classification
+* **Classify Image** -> choose a image, it will be sent to the Network and simulated to get its classification
 
-* **classify Folder Image** -> it will do the **classify Image** for all the images currently entered in the app
+* **Classify Folder Image** -> it will do the **classify Image** for all the images currently entered in the app
 
 ### Train Configuration
 
-* **Hidden layers Function** -> choose the ativation function for the hidden layers
+* **Hidden Layers Function** -> choose the ativation function for the hidden layers
 
-* **Output function** -> choose the activation function for the output unity
+* **Output Function** -> choose the activation function for the output unity
 
 * **Train Algorithm** -> choose the neural network train algorithm
 
